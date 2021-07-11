@@ -14,7 +14,7 @@
 # Compiled Dynamic libraries
 *.so
 *.dylib
-*.dll
+#*.dll  #to make sure FreeGLUT comes along
 
 # Fortran module files
 *.mod
@@ -24,9 +24,13 @@
 *.lai
 *.la
 *.a
-*.lib
+#*.lib  #to make sure FreeGLUT comes along
 
 # Executables
 *.exe
 *.out
 *.app
+
+# Codeblocks files
+*.layout
+*.depend
