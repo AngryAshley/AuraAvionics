@@ -1,39 +1,35 @@
 #include "LUtil.h"
 
-void runMainLoop( int val );
 
-int main( int argc, char* args[] ){
-	glutInit( &argc, args );
-	glutInitContextVersion( 2, 1 );
-	glutInitDisplayMode( GLUT_DOUBLE );
-	glutInitWindowSize( SCREEN_WIDTH, SCREEN_HEIGHT );
-	glutCreateWindow( "Aura" );
 
-	//Do post window/context creation initialization
-	if( !initGL() )
-	{
-		printf( "Unable to initialize graphics library!\n" );
+void runMainLoop(int val);
+
+int main(int argc, char* args[]){
+	glutInit(&argc, args);
+	glutInitContextVersion(2,1);
+	glutInitDisplayMode(GLUT_DOUBLE);
+	glutInitWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+	glutCreateWindow("Aura");
+	if(!initGL()){
+		printf("ERROR: Unable to initialize OpenGL!\n");
 		return 1;
 	}
-
-	//Set rendering function
-	glutDisplayFunc( render );
-
-	//Set main loop
-	glutTimerFunc( 1000 / SCREEN_FPS, runMainLoop, 0 );
-
-	//Start GLUT main loop
+	if( !loadMedia() )
+    {
+        printf( "Unable to load media!\n" );
+        return 2;
+    }
+    glutKeyboardFunc(handleKeys);
+	glutDisplayFunc(render);
+	glutTimerFunc(1000 / SCREEN_FPS, runMainLoop, 0);
 	glutMainLoop();
 
 	return 0;
 }
 
-void runMainLoop( int val )
-{
-    //Frame logic
+void runMainLoop( int val ){
     update();
     render();
 
-    //Run frame one more time
     glutTimerFunc( 1000 / SCREEN_FPS, runMainLoop, val );
 }
