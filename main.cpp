@@ -5,12 +5,22 @@ using namespace std;
 
 bool debug = true;
 string version="0.1";
+std::string path_exe;
+
+void getPath() {
+    char path_exe_temp[1024];
+    GetModuleFileName(NULL, path_exe_temp, 1024);
+    int pos=std::string(path_exe_temp).find_last_of("\\/");
+    path_exe=std::string(path_exe_temp).substr( 0, pos+1);
+}
 
 void runMainLoop(int val);
 
 int main(int argc, char* args[]){
     if(debug){AllocConsole();freopen("CONOUT$","a",stdout);SetConsoleTitle("Aura Virtual Cockpit Debug Console");}
-    printf("Initializing OpenGL... ");
+    printf("Initializing Program\n");
+    getPath();setLUtilPath(path_exe); //Handle path variable
+    printf("Initializing Graphics... \n");
 	glutInit(&argc, args);
 	glutInitContextVersion(2,1);
 	glutInitDisplayMode(GLUT_DOUBLE);

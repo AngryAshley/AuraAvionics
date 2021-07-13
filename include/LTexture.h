@@ -39,18 +39,12 @@ class LTexture
         Side Effects:
          -Binds a NULL texture
         */
+        bool loadTextureFromPixels32();
+        bool loadPixelsFromFile( std::string path );
         bool loadTextureFromFile( std::string path );
+        bool loadTextureFromFileWithColorKey( std::string path, GLubyte r, GLubyte g, GLubyte b, GLubyte a = 000 );
 
         void freeTexture();
-        /*
-        Pre Condition:
-         -A valid OpenGL context
-        Post Condition:
-         -Deletes texture if it exists
-         -Sets texture ID to 0
-        Side Effects:
-         -None
-        */
 
         void render( GLfloat x, GLfloat y, LFRect* clip );
         /*
@@ -73,7 +67,7 @@ class LTexture
 
         //Texture name
         GLuint mTextureID;
-
+        GLuint* mPixels;
         //Texture dimensions
         GLuint mTextureWidth;
         GLuint mTextureHeight;
