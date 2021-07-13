@@ -9,13 +9,13 @@ string version="0.1";
 void runMainLoop(int val);
 
 int main(int argc, char* args[]){
-    if(debug){AllocConsole();freopen("CONOUT$","a",stdout);}
+    if(debug){AllocConsole();freopen("CONOUT$","a",stdout);SetConsoleTitle("Aura Virtual Cockpit Debug Console");}
     printf("Initializing OpenGL... ");
 	glutInit(&argc, args);
 	glutInitContextVersion(2,1);
 	glutInitDisplayMode(GLUT_DOUBLE);
 	glutInitWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-	glutCreateWindow("Aura");
+	glutCreateWindow("Aura Virtual Cockpit");
 	if(!initGL()){
 		printf("ERROR: Unable to initialize OpenGL!\n");return 1;
 	}
