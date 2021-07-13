@@ -17,7 +17,13 @@ void getPath() {
 void runMainLoop(int val);
 
 int main(int argc, char* args[]){
-    if(debug){AllocConsole();freopen("CONOUT$","a",stdout);SetConsoleTitle("Aura Virtual Cockpit Debug Console");}
+    if(argc>1){ //handle arguments before running.
+        bool enableConsole=false;
+        if(!strcmp("-d",args[1])){enableConsole=true;};
+
+        if(enableConsole){AllocConsole();freopen("CONOUT$","a",stdout);SetConsoleTitle("Aura Virtual Cockpit Debug Console");}
+    }
+
     printf("Initializing Program\n");
     getPath();setLUtilPath(path_exe); //Handle path variable
     printf("Initializing Graphics... \n");
