@@ -4,6 +4,7 @@
 #include "LOpenGL.h"
 #include <stdio.h>
 #include <string>
+#include "LFRect.h"
 
 class LTexture
 {
@@ -28,7 +29,7 @@ class LTexture
          -None
         */
 
-        bool loadTextureFromPixels32( GLuint* pixels, GLuint width, GLuint height );
+        bool loadTextureFromPixels32( GLuint* pixels, GLuint imgWidth, GLuint imgHeight, GLuint texWidth, GLuint texHeight );
         /*
         Pre Condition:
          -A valid OpenGL context
@@ -51,7 +52,7 @@ class LTexture
          -None
         */
 
-        void render( GLfloat x, GLfloat y );
+        void render( GLfloat x, GLfloat y, LFRect* clip );
         /*
         Pre Condition:
          -A valid OpenGL context
@@ -63,42 +64,23 @@ class LTexture
         */
 
         GLuint getTextureID();
-        /*
-        Pre Condition:
-         -None
-        Post Condition:
-         -Returns texture name/ID
-        Side Effects:
-         -None
-        */
-
         GLuint textureWidth();
-        /*
-        Pre Condition:
-         -None
-        Post Condition:
-         -Returns texture width
-        Side Effects:
-         -None
-        */
-
         GLuint textureHeight();
-        /*
-        Pre Condition:
-         -None
-        Post Condition:
-         -Returns texture height
-        Side Effects:
-         -None
-        */
-
+        GLuint imageWidth();
+        GLuint imageHeight();
     private:
+        GLuint powerOfTwo( GLuint num );
+
         //Texture name
         GLuint mTextureID;
 
         //Texture dimensions
         GLuint mTextureWidth;
         GLuint mTextureHeight;
+
+        //Unpadded image dimensions
+        GLuint mImageWidth;
+        GLuint mImageHeight;
 };
 
 #endif

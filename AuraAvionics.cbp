@@ -48,6 +48,10 @@
 			<Add directory="freeglut/bin/x64" />
 			<Add directory="DevIL/lib/x64/Release" />
 		</Linker>
+		<Unit filename="icon.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
+		<Unit filename="include/LFRect.h" />
 		<Unit filename="include/LOpenGL.h">
 			<Option target="Debug" />
 		</Unit>

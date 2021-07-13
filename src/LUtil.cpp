@@ -4,7 +4,8 @@
 #include "IL/ilu.h"
 #include <string>
 
-LTexture gLoadedTexture;
+LTexture gNon2NTexture;
+LFRect logo;
 std::string path_exe;
 int poopsies = 0;
 
@@ -30,7 +31,9 @@ bool initGL(){
         printf("Error initializing OpenGL! %s\n",gluErrorString(error));
         return false;
     }
+    printf("Done\nInitializing DevIL... ");
     ilInit();
+    iluInit();
     ilClearColor(255,255,255,000);
     ILenum ilError = ilGetError();
     if( ilError != IL_NO_ERROR )
@@ -44,8 +47,12 @@ bool initGL(){
 
 bool loadMedia()
 {
+    logo.x=0.f;
+    logo.y=0.f;
+    logo.w=978.f;
+    logo.h=512.f;
     //Load texture
-    if(!gLoadedTexture.loadTextureFromFile(path_exe+"texture.png"))
+    if(!gNon2NTexture.loadTextureFromFile(path_exe+"assets/mainLogo.png"))
     {
         printf( "Unable to load file texture!\n" );
         return false;
@@ -68,11 +75,11 @@ void render(){
     glClear( GL_COLOR_BUFFER_BIT );
 
     //Calculate centered offsets
-    GLfloat x = ( SCREEN_WIDTH - gLoadedTexture.textureWidth() ) / 4.f;
-    GLfloat y = ( SCREEN_HEIGHT - gLoadedTexture.textureHeight() ) / 4.f;
+    GLfloat x = ( SCREEN_WIDTH - gNon2NTexture.textureWidth() ) / 4.f;
+    GLfloat y = ( SCREEN_HEIGHT - gNon2NTexture.textureHeight() ) / 4.f;
 
     //Render texture
-    gLoadedTexture.render( x, y );
+    gNon2NTexture.render( ( SCREEN_WIDTH - gNon2NTexture.imageWidth() ) / 2.f, ( SCREEN_HEIGHT - gNon2NTexture.imageHeight() ) / 2.f ,&logo);
 
     //Update screen
     glutSwapBuffers();
